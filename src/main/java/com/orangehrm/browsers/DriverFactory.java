@@ -1,7 +1,5 @@
 package com.orangehrm.browsers;
 
-import org.apache.commons.collections4.functors.SwitchClosure;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
@@ -18,12 +16,18 @@ public class DriverFactory {
      {
     	WebDriverManager.chromedriver().setup();
     	webDriverInstance=new ChromeDriverInstance();
-    	 
+    	    	 
      }
      else if (browserType==BrowserType.FIREFOX)
      {
     	 WebDriverManager.firefoxdriver().setup();
      	webDriverInstance=new FirefoxDriverInstance();  	 
+    	 
+     }
+     else if (browserType==BrowserType.IE)
+     {
+    	 WebDriverManager.iedriver().setup();
+     	webDriverInstance=new IEDriverInstance();	 
     	 
      }
      else {
