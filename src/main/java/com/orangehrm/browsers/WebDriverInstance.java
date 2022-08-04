@@ -23,9 +23,8 @@ public abstract class WebDriverInstance {
 
 		}
 	}
-	
-	public  WebDriver getDriver()
-	{
+
+	public WebDriver getDriver() {
 		return this.driver;
 	}
 
