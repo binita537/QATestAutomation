@@ -1,41 +1,27 @@
 package com.orangehrm.browsers;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 public class DriverFactory {
-	
-	
-	
-	public static WebDriverInstance getDriverInstance(BrowserType browserType) throws Exception
-	{
+
+	public static WebDriverInstance getDriverInstance(BrowserType browserType) throws Exception {
 		WebDriverInstance webDriverInstance;
-		
-			
 
-     if(browserType==BrowserType.CHROME)
-     {
-    	WebDriverManager.chromedriver().setup();
-    	webDriverInstance=new ChromeDriverInstance();
-    	    	 
-     }
-     else if (browserType==BrowserType.FIREFOX)
-     {
-    	 WebDriverManager.firefoxdriver().setup();
-     	webDriverInstance=new FirefoxDriverInstance();  	 
-    	 
-     }
-     else if (browserType==BrowserType.IE)
-     {
-    	 WebDriverManager.iedriver().setup();
-     	webDriverInstance=new IEDriverInstance();	 
-    	 
-     }
-     else {
-    	 
-    	 throw new Exception("PLease provide correct name of the driver:"+browserType+"this driver is not valid");
-     }
-	
-     return webDriverInstance;
+		if (browserType == BrowserType.CHROME) {
+			webDriverInstance = new ChromeDriverInstance();
+			System.out.println("I am driverfactory class to deside which driver object you want ");
 
-}
+		} else if (browserType == BrowserType.FIREFOX) {
+			webDriverInstance = new FirefoxDriverInstance();
+
+		} else if (browserType == BrowserType.IE) {
+			webDriverInstance = new IEDriverInstance();
+
+		} else {
+
+			throw new IllegalArgumentException(
+					String.format("WebDriver type <%s> is not correct,please provide correct one", browserType));
+		}
+
+		return webDriverInstance;
+
+	}
 }

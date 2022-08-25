@@ -2,11 +2,13 @@ package com.orangehrm.browsers;
 
 import org.openqa.selenium.WebDriver;
 
-public abstract class WebDriverInstance {
+public abstract class WebDriverInstance extends AbstarctWebDriverInstance {
 
 	protected WebDriver driver;
+	
 
 	public WebDriverInstance() {
+		System.out.println("I am webdriver Instance interface");
 
 	}
 

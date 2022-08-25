@@ -1,0 +1,111 @@
+package com.orangehrm.commonutils;
+
+import java.util.Collections;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.orangehrm.browsers.AbstarctWebDriverInstance;
+
+//Why we created this class ? if in fucture some mobile application and if we want to write a MobileUiAction then we can extends this class
+
+public abstract class CommonUIActions extends AbstarctCommonActions<WebElement> {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(CommonUIActions.class);
+
+	public CommonUIActions() {
+
+	}
+
+	public WebElement findElement(WebElement webElement, By by) {
+		return super.findElement(webElement, by);
+	}
+	
+	public WebElement waitAndCLickElement(AbstarctWebDriverInstance abstarctWebDriverInstance, WebElement WebElement) {
+		WebElement webElemet = null;
+		try {
+			webElemet =  abstarctWebDriverInstance.getWebDriverWait()
+					.until(ExpectedConditions.elementToBeClickable(WebElement));
+
+		} catch (Exception e) {
+			LOGGER.debug("Unable to click element : <{}> . exception ", WebElement, e);
+		}
+
+		return webElemet;
+
+	}
+
+	public WebElement waitAndCLickElement(AbstarctWebDriverInstance abstarctWebDriverInstance, By by) {
+		WebElement webElemet = null;
+		try {
+			webElemet =  abstarctWebDriverInstance.getWebDriverWait()
+					.until(ExpectedConditions.elementToBeClickable(by));
+
+		} catch (Exception e) {
+			LOGGER.debug("Unable to click element : <{}> . exception ", by, e);
+		}
+
+		return webElemet;
+
+	}
+
+	public WebElement waitUntilAppearAndGetElemet(AbstarctWebDriverInstance abstarctWebDriverInstance, By by) {
+		WebElement webElemet = null;
+		try {
+			webElemet = abstarctWebDriverInstance.getWebDriverWait()
+					.until(ExpectedConditions.visibilityOfElementLocated(by));
+
+		} catch (Exception e) {
+			LOGGER.debug(" Element is not appear: <{}> . exception ", by, e);
+		}
+
+		return webElemet;
+
+	}
+
+	public List<WebElement> waitUntilAppearAndAllGetElemets(AbstarctWebDriverInstance abstarctWebDriverInstance, By by) {
+		List<WebElement> webElemets = Collections.emptyList();
+		try {
+			webElemets =  abstarctWebDriverInstance.getWebDriverWait()
+					.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
+
+		} catch (Exception e) {
+			LOGGER.debug(" Elements is not appear: <{}> . exception ", by, e);
+		}
+
+		return webElemets;
+
+	}
+
+	public WebElement waitUntilPreseneceAndGetElemets(AbstarctWebDriverInstance abstarctWebDriverInstance, By by) {
+		WebElement webElemet = null;
+		try {
+			webElemet =  abstarctWebDriverInstance.getWebDriverWait()
+					.until(ExpectedConditions.presenceOfElementLocated(by));
+
+		} catch (Exception e) {
+			LOGGER.debug(" Elements is not appear: <{}> . exception ", by, e);
+		}
+
+		return webElemet;
+
+	}
+
+	public List<WebElement> waitUntilPresenceAndAllGetElemets(AbstarctWebDriverInstance abstarctWebDriverInstance, By by) {
+		List<WebElement> webElemets = Collections.emptyList();
+		try {
+			webElemets =abstarctWebDriverInstance.getWebDriverWait()
+					.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
+
+		} catch (Exception e) {
+			LOGGER.debug(" Elements is not appear: <{}> . exception ", by, e);
+		}
+
+		return webElemets;
+
+	}
+}
